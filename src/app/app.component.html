@@ -1,20 +1,49 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div style="text-align:center" class="mb-5">
   <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+    Angular form generator
+  </h1>  
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<div class="container mb-5">
+  <form [formGroup]="generatorForm">
+    <div class="col-md-8">        
+      <div class="col-md-8">
+        <div class="form-group">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" formControlName="formType" value="1" id="templateDriven" class="custom-control-input">
+            <label class="custom-control-label" for="templateDriven">Template Driven Forms</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" formControlName="formType" value="2" id="reactive" class="custom-control-input">
+            <label class="custom-control-label" for="reactive">Reactive Forms</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for ="description"> Json Input {{gf.jsonInput.errors}}</label>
+           <textarea  formControlName="jsonInput" class="form-control" rows="10" cols="30" placeholder="Enter Your Json" [ngClass]="{ 'is-invalid': gf.jsonInput.errors }" required></textarea>
+           <div *ngIf="gf.jsonInput.errors" class="invalid-feedback">
+            <div *ngIf="gf.jsonInput.errors.required">Json is required</div>
+           </div>
+          </div>
+        <div>
+          <button type="button" [disabled]="generatorForm.invalid" class="btn btn-primary" (click)="onSubmit()"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Submit</button>
+        </div>
+    </div>
+    </div>
+  </form>
+</div>
+<div class="container mb-5">
+  <div class="col-md-4"  [innerHtml]="htmlCode">
+    
+  </div>
+</div>
+<div class="container mb-5">
+  <div class="row">
+    <div class="col">
+        <textarea  class="form-control" rows="20" cols="30" [ngModel]="sanitizedHtmlCode"></textarea>
+    </div>
+    <div class="col">
+        <textarea  class="form-control" rows="20" cols="30" [ngModel]="tsCode"></textarea> 
+    </div>
+  </div>
+</div>
