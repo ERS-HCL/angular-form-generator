@@ -1,4 +1,6 @@
-# AngularFormGenerator
+# Angular Form Generator
+
+Simply enter JSON object to get template driven or reactive form html and typescript source code.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
