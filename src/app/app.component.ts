@@ -116,4 +116,11 @@ onSubmit () {
     }
   }
 
+  /* To copy Text from Textbox */
+  copyCode(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+  }
+
 }

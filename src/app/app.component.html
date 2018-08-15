@@ -40,11 +40,25 @@
 </div>
 <div class="container mb-5">
   <div class="row">
+      <div class="col-md-3">
+          <h4>Html code</h4>
+      </div>
+      <div class="col-md-3">
+          <span class="float-right"> <span style="font-family: 'Courier New', Courier, monospace;">Copy</span><img height="25px" width="45px" (click)="copyCode(htmlcode)" src="../assets/copy.png" /></span>
+      </div>
+      <div class="col-md-3">
+          <h4>Typescript code</h4>
+      </div>
+      <div class="col-md-3">
+          <span class="float-right"> <span style="font-family: 'Courier New', Courier, monospace;">Copy</span> <img height="25px" width="45px" (click)="copyCode(tscode)" src="../assets/copy.png" /></span>
+      </div>
+  </div>
+  <div class="row">
     <div class="col">
-        <textarea  class="form-control" rows="20" cols="30" [ngModel]="sanitizedHtmlCode"></textarea>
+        <textarea  class="form-control" rows="20" cols="30" [ngModel]="sanitizedHtmlCode" #htmlcode></textarea>
     </div>
     <div class="col">
-        <textarea  class="form-control" rows="20" cols="30" [ngModel]="tsCode"></textarea> 
+        <textarea  class="form-control" rows="20" cols="30" [ngModel]="tsCode" #tscode></textarea> 
     </div>
   </div>
 </div>
