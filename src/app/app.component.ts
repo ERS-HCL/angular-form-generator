@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JsonInput } from './types/jsonInput';
@@ -11,17 +11,18 @@ import { ValidatorsType } from './constants';
 
 export class AppComponent implements OnInit {
   public jsonInput: JsonInput[] = [{fieldName: 'firstName', type: 'text', label: 'First Name', validations: [{type: 'required', value: 'true', errorMessage: 'Firstname is required'}, {type: 'minlength', value: '5', errorMessage: 'Firstname must be 5 characters long'}]}];
-  public formType: Number = 1;
+  public formType: Number = 2;
   public htmlCode;
   public sanitizedHtmlCode;
   public tsCode: String;
   public generatorForm: FormGroup;
+  @ViewChild('code') code: ElementRef;
 
   constructor(private formBuilder: FormBuilder, private sanitizer: DomSanitizer) { }
 
   ngOnInit () {
     this.generatorForm = this.formBuilder.group({
-      formType: ['1'],
+      formType: ['2'],
       jsonInput: [JSON.stringify(this.jsonInput, null, 2), Validators.required]
     });
     this.generateHtmlCode();
@@ -111,16 +112,18 @@ onSubmit () {
       this.jsonInput = JSON.parse(this.generatorForm.value.jsonInput);
       this.generateHtmlCode();
       this.generateTsCode();
-    } else {
-      return;
+      this.code.nativeElement.scrollIntoView({behavior: 'smooth'});
     }
+    return;
   }
 
-  /* To copy Text from Textbox */
-  copyCode(inputElement) {
+  copyCode(inputElement, copy) {
     inputElement.select();
     document.execCommand('copy');
-    inputElement.setSelectionRange(0, 0);
+    copy.textContent = 'Copied';
+    setTimeout(function() {
+      copy.textContent = 'Copy';
+    }, 1000);
   }
 
 }
